@@ -2,7 +2,7 @@ baseurl: https://takag.me
 languageCode: ja
 theme: hugo-theme-stack
 paginate: 5
-title: てきとうブログ
+title: Yuuのブログ
 
 # languages:
 #     en:
@@ -57,14 +57,14 @@ params:
 
   sidebar:
     emoji: 💻
-    subtitle: 色々やっていきたい
+    subtitle: なにかしらのアウトプットする場所
     avatar:
       enabled: true
       local: true
       src: img/avatar.png
 
   article:
-    math: false
+    math: true
     toc: true
     readingTime: true
     license:
@@ -72,7 +72,7 @@ params:
       default: Licensed under CC BY-NC-SA 4.0
 
   comments:
-    enabled: true
+    enabled: false
     provider: disqus
 
     disqusjs:
@@ -148,6 +148,7 @@ params:
     cusdis:
       host:
       id:
+
   widgets:
     homepage:
       - type: search
@@ -157,9 +158,9 @@ params:
       - type: categories
         params:
           limit: 10
-      - type: tag-cloud
-        params:
-          limit: 10
+      # - type: tag-cloud
+      #   params:
+      #     limit: 10
     page:
       - type: toc
 
@@ -234,6 +235,6 @@ markup:
     codeFences: true
     guessSyntax: true
     lineNoStart: 1
-    lineNos: true
+    lineNos: false
     lineNumbersInTable: true
     tabWidth: 4
