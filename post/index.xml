@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Yuuのブログ</title><link>https://takag.me/post/</link><description>Recent content in Posts on Yuuのブログ</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Wed, 21 Dec 2022 07:16:28 +0000</lastBuildDate><atom:link href="https://takag.me/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World</title><link>https://takag.me/p/hello-world/</link><pubDate>Wed, 21 Dec 2022 07:16:28 +0000</pubDate><guid>https://takag.me/p/hello-world/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Yuuのブログ</title><link>https://takag.me/post/</link><description>Recent content in Posts on Yuuのブログ</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Wed, 21 Dec 2022 07:16:28 +0000</lastBuildDate><atom:link href="https://takag.me/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World</title><link>https://takag.me/p/hello-world/</link><pubDate>Wed, 21 Dec 2022 07:16:28 +0000</pubDate><guid>https://takag.me/p/hello-world/</guid><description>&lt;img src="https://takag.me/img/2022/12-21/hugo-logo.jpeg" alt="Featured image of post Hello World" />&lt;h2 id="はじめに">はじめに&lt;/h2>
 &lt;p>ブログを開設しました。やる気があるときに書いていきます。&lt;br>
 初投稿はこのブログの技術的なことについて書き残しておこうと思います。&lt;/p>
 &lt;h2 id="技術スタック">技術スタック&lt;/h2>
@@ -24,10 +24,11 @@
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ hugo new post/sample.md
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
-&lt;li>
-&lt;p>記事を書く&lt;br>
-ファイルパスは&lt;code>&amp;lt;site-name&amp;gt;/content/post&lt;/code>&lt;/p>
-&lt;/li>
+&lt;li>記事を書く&lt;br>
+ファイルパスは&lt;code>&amp;lt;site-name&amp;gt;/content/post&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ hugo server
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>
 &lt;p>GitHub に push&lt;/p>
 &lt;/li>
