@@ -22,7 +22,8 @@ jobs:
           extended: true
 
       - name: Build
-        run: hugo --config src/my-site/config.yaml --themesDir src/my-site/themes/ --minify
+        run: hugo --minify
+        working-directory: ./src/my-site
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
