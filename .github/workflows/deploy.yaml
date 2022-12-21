@@ -22,7 +22,7 @@ jobs:
           # extended: true
 
       - name: Build
-        run: hugo --config src/my-site/config.yaml --themes src/my-site/themes/hugo-theme-stack --minify
+        run: hugo --config src/my-site/config.yaml --theme src/my-site/themes/hugo-theme-stack --minify
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
