@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>docker on Yuuのブログ</title><link>https://takag.me/tags/docker/</link><description>Recent content in docker on Yuuのブログ</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Wed, 21 Dec 2022 07:16:28 +0000</lastBuildDate><atom:link href="https://takag.me/tags/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World</title><link>https://takag.me/p/hello-world/</link><pubDate>Wed, 21 Dec 2022 07:16:28 +0000</pubDate><guid>https://takag.me/p/hello-world/</guid><description>&lt;img src="https://takag.me/img/2022/12-21/hugo-logo.jpeg" alt="Featured image of post Hello World" />&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>ブログを開設しました。やる気があるときに書いていきます。&lt;br>
+初投稿はこのブログの技術的なことについて書き残しておこうと思います。&lt;/p>
+&lt;h2 id="技術スタック">技術スタック&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://github.com/golang/go" target="_blank" rel="noopener"
+>Golang&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/gohugoio/hugo" target="_blank" rel="noopener"
+>Hugo&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
+>Hugo Theme Stack&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://hub.docker.com/r/klakegg/hugo" target="_blank" rel="noopener"
+>Docker&lt;/a>&lt;/li>
+&lt;li>VScode Remote Containers&lt;/li>
+&lt;li>GitHub Pages&lt;/li>
+&lt;li>GitHub Actions&lt;/li>
+&lt;/ul>
+&lt;h2 id="hugo-について">Hugo について&lt;/h2>
+&lt;p>Go で記述された静的サイトジェネレーター&lt;br>
+マークダウン形式で記事が書けるのでとても簡単&lt;/p>
+&lt;h2 id="記事投稿の流れ">記事投稿の流れ&lt;/h2>
+&lt;ol>
+&lt;li>記事を生成&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ hugo new post/sample.md
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>記事を書く&lt;br>
+ファイルパスは&lt;code>&amp;lt;site-name&amp;gt;/content/post&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ hugo server
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>
+&lt;p>GitHub に push&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Github Action Workflow によりデプロイ完了！&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>Go の勉強がてらに良さげなフレームワークを探してこれにたどり着きました。&lt;br>
+結局 Go の勉強にはなりませんでしたが&amp;hellip;&lt;/p>
+&lt;p>それはさておき、記事を量産できるよう頑張ります。&lt;/p></description></item></channel></rss>
