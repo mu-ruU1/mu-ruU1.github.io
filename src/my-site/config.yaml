@@ -203,12 +203,21 @@ menu:
       url: https://github.com/mu-ruU1
       params:
         icon: brand-github
+      weight: 1
 
     - identifier: twitter
       name: Twitter
       url: https://twitter.com/mu_ruU1
       params:
         icon: brand-twitter
+      weight: 2
+
+    - identifier: feed
+      name: Feed
+      url: /index.xml
+      params:
+        icon: rss
+      weight: 3
 
 related:
   includeNewer: true
