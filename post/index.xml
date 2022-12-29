@@ -4,7 +4,7 @@
 &lt;h2 id="事の発端">事の発端&lt;/h2>
 &lt;p>手始めに Cisco891F x 3 を使って&lt;a class="link" href="https://github.com/mu-ruU1/network-study/tree/main/vlan/svi" target="_blank" rel="noopener"
 >SVI を利用した VLAN 間ルーティング&lt;/a>を試していたところ特定の条件で ping が通らないことが起こりました。&lt;br>
-具体的に言うと、同一 VLAN では ping が通るが異なる VLAN 間では ping が通らないということです。&lt;/p>
+具体的には、同一 VLAN では ping が通るが異なる VLAN 間では ping が通らないといった状態です。&lt;/p>
 &lt;h2 id="内容">内容&lt;/h2>
 &lt;p>VLAN10(172.16.10.0/24)に所属している PC から VLAN20(172.16.20.0/24)に所属している PC に ping を実行したときの結果が以下のようになりました。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">PS &lt;/span>&lt;span class="n">C:&lt;/span>&lt;span class="p">\&lt;/span>&lt;span class="n">Users&lt;/span>&lt;span class="p">\&lt;/span>&lt;span class="n">user&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="n">ping&lt;/span> &lt;span class="mf">172.16&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="py">20&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="py">1&lt;/span>
