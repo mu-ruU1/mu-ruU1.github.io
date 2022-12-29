@@ -214,7 +214,7 @@ menu:
 
     - identifier: feed
       name: Feed
-      url: /index.xml
+      url: /post/index.xml
       params:
         icon: rss
       weight: 3
