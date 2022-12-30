@@ -1,6 +1,6 @@
 ---
 title: About
-description: 自己紹介
+description:
 lastmod: "2022-12-21"
 toc: false
 menu:
@@ -10,4 +10,9 @@ menu:
       icon: user
 ---
 
-そのうち書きます
+ネットワーク・サーバー に興味のある学生です。  
+コンピュータ部の部長兼サーバー管理をしています。
+
+---
+
+- [KC3 2022](https://kc3.me/conf/study/461/)
