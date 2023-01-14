@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>nec ix on Yuuのブログ</title><link>https://takag.me/tags/nec-ix/</link><description>Recent content in nec ix on Yuuのブログ</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Tue, 10 Jan 2023 01:12:14 +0900</lastBuildDate><atom:link href="https://takag.me/tags/nec-ix/index.xml" rel="self" type="application/rss+xml"/><item><title>IX2207で自宅ネットワーク改造 (1)</title><link>https://takag.me/p/2023-01-10/</link><pubDate>Tue, 10 Jan 2023 01:12:14 +0900</pubDate><guid>https://takag.me/p/2023-01-10/</guid><description>&lt;img src="https://takag.me/img/2023/01-10/nec-ix2207-o.jpg" alt="Featured image of post IX2207で自宅ネットワーク改造 (1)" />&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>自宅のネットワークを改造したい。&lt;br>
+そういう訳で NEC IX2007 を買いました。&lt;br>
+YAMAHA の VPN ルーターと迷ったのですがクラウド管理等が無料でできるということで NEC にしました。
+今回は初期設定と VPN 設定までを行います。&lt;br>
+今後、VLAN の設定もしていきます。&lt;/p>
+&lt;h2 id="ネットワーク構成">ネットワーク構成&lt;/h2>
+&lt;p>構築後のネットワーク構成&lt;/p>
+&lt;p>&lt;img src="https://takag.me/img/2023/01-10/home-nw-v1.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Aterm はブリッジモードで運用します。&lt;/p>
+&lt;h2 id="ファームウェア更新">ファームウェア更新&lt;/h2>
+&lt;p>ファームウェア更新は無料で行えます。&lt;br>
+&lt;a class="link" href="http://www.express.nec.co.jp/idaten/network/ix/setsuzokushinseisho.pdf" target="_blank" rel="noopener"
+>ソフトウェアダウンロード手順&lt;/a>通りに申請すれば、ダウンロードリンクをもらえます。&lt;br>
+バージョン 10 以上だと、NetMeister 経由で更新することができます。&lt;br>
+私は、Web 管理ページからソフトウェアのファイルをアップロードして更新を行いました。&lt;/p>
+&lt;h2 id="スーパーリセット">スーパーリセット&lt;/h2>
+&lt;p>パスワードを忘れてしまったときや設定データを工場出荷時の設定に戻す場合に使用します。&lt;br>
+ランニングコンフィグ、スタートアップコンフィグが消去されます。&lt;br>
+中古で買ったので念のためしておきました。&lt;/p>
+&lt;ol>
+&lt;li>プログラムのロード中に&lt;code>Ctrl&lt;/code>+&lt;code>c&lt;/code>でブートモニタモードに移行&lt;/li>
+&lt;li>&lt;code>cc&lt;/code>コマンドでスタートアップコンフィグを削除&lt;/li>
+&lt;li>&lt;code>b&lt;/code>コマンドでプログラムファイルのロードを開始&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-txt" data-lang="txt">&lt;span class="line">&lt;span class="cl">NEC Bootstrap Software
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Copyright (c) NEC Corporation 2001-2022. All rights reserved.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">%BOOT-INFO: Trying flash load, exec-image [ix2207-ms-10.7.18.ldc].
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Loading: ############################
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NEC Bootstrap Software, Version 17.1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Copyright (c) NEC Corporation 2001-2022. All rights reserved.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">boot[0]&amp;gt; cc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Enter &amp;#34;Y&amp;#34; to clear startup configuration: Y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">% Startup configuration is cleared.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NEC Bootstrap Software, Version 17.1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Copyright (c) NEC Corporation 2001-2022. All rights reserved.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">boot[0]&amp;gt; b
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="netmeister">NetMeister&lt;/h2>
+&lt;p>クラウド経由でルーターの管理をすることができます。&lt;br>
+無料で利用できるのがありがたい。&lt;br>
+DDNS やコンフィグの保存などもできます。&lt;br>
+また CPU 使用率や温度の統計が見れたり、異常がある場合はメールで通知してくれたり、とても便利です。&lt;br>
+Gmail などのフリーメールアドレスではアカウント作成できないので注意です。&lt;/p>
+&lt;p>&lt;img src="https://takag.me/img/2023/01-10/nm-host.png"
+loading="lazy"
+alt="NetMeister"
+>&lt;/p>
+&lt;h2 id="モード構成">モード構成&lt;/h2>
+&lt;p>IX2000 シリーズにはオペレーションモードと 3 つのコンフィグモードがあります。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>オペレーションモード&lt;br>
+プロンプト: &lt;code>Router#&lt;/code>&lt;br>
+&lt;code>show running-config&lt;/code>できないので注意&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>コンフィグモード&lt;/p>
+&lt;ul>
+&lt;li>グローバルコンフィグモード&lt;br>
+プロンプト: &lt;code>Router(config)#&lt;/code>&lt;br>
+一般的な設定をする&lt;/li>
+&lt;li>デバイスコンフィグモード&lt;br>
+プロンプト: &lt;code>Router(config-GigaEthernet0)#&lt;/code>&lt;br>
+各ポートの物理的な設定をする&lt;/li>
+&lt;li>インタフェースコンフィグモード&lt;br>
+プロンプト: &lt;code>Router(config-GigaEthernet0.0)#&lt;/code>&lt;br>
+論理的な接続の設定をする&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="nec-ix2207-について">NEC IX2207 について&lt;/h2>
+&lt;p>2 個の独立 LAN ポートと、4 ポートのスイッチングハブポートを内蔵している。&lt;br>
+2 つの USB ポートは USB 型のデータ通信端末を取り付けることができるらしいです。&lt;br>
+筐体も小型で取り回しが良いです。&lt;br>
+ちなみにファンレスです。&lt;/p>
+&lt;h2 id="初期設定">初期設定&lt;/h2>
+&lt;p>Web 管理ページに入るために最低限の設定を行います。&lt;br>
+また Web 管理ページでは簡単な設定しかできないので注意です。&lt;/p>
+&lt;p>ユーザー作成、http サービスの有効、GE2 の起動、前面のかんたん操作ボタンを無効&lt;br>
+の設定です。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-txt" data-lang="txt">&lt;span class="line">&lt;span class="cl">Router(config)# username &amp;lt;user&amp;gt; password plain &amp;lt;password&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Router(config)# http-server username &amp;lt;user&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Router(config)# http-server ip enable
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Router(config)# interface GigaEthernet2.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Router(config-GigaEthernet2.0)# ip address 192.168.10.254/24
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Router(config-GigaEthernet2.0)# no shutdown
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Router(config)# no usbmem button enable
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>後は、GE2 と PC を LAN ケーブルで接続し&lt;code>192.168.10.0/24&lt;/code>のアドレスを設定する。&lt;/p>
+&lt;h2 id="wan-設定">WAN 設定&lt;/h2>
+&lt;p>私の家では CATV 事業者が提供している光回線を利用しています。&lt;br>
+そのため、IP 接続とし WAN 側 IP アドレスは自動取得で設定しています。&lt;/p>
+&lt;p>&lt;img src="https://takag.me/img/2023/01-10/wan.png"
+loading="lazy"
+>&lt;/p>
+&lt;h3 id="ここで問題が">ここで問題が&amp;hellip;&lt;/h3>
+&lt;p>いつまで経っても WAN 側 IP がふられない。&lt;/p>
+&lt;p>&lt;img src="https://takag.me/img/2023/01-10/wan-info.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>色々調べた結果、ONU 直下に繋ぐ機器を変更した際は ONU の再起動を行う必要があると記載がありました。&lt;br>
+それをやった結果解決しました。&lt;/p>
+&lt;h2 id="その他の設定">その他の設定&lt;/h2>
+&lt;p>DHCP の設定、NTP サーバーの設定を行いました。&lt;br>
+VPN の設定も特に問題なくいけます。&lt;/p>
+&lt;h2 id="最後に">最後に&lt;/h2>
+&lt;p>Android12 から L2TP/IPSec の設定ができなくなりました。&lt;br>
+NEC IX でも IKEv2/IPSec の設定をコマンドで設定できるようなのですがよく分からないので断念しました。&lt;/p>
+&lt;h2 id="参考">参考&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://jpn.nec.com/univerge/ix/Info/ix2207.html" target="_blank" rel="noopener"
+>製品ページ&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://jpn.nec.com/univerge/ix/Manual/index.html" target="_blank" rel="noopener"
+>製品マニュアル&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://changineer.info/network/nec_ix" target="_blank" rel="noopener"
+>ネットワークチェンジニアとして&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://nwengblog.com/tag/univerge-ix/" target="_blank" rel="noopener"
+>matsublog&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>
