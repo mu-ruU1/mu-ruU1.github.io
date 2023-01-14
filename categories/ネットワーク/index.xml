@@ -110,7 +110,11 @@ loading="lazy"
 VPN の設定も特に問題なくいけます。&lt;/p>
 &lt;h2 id="最後に">最後に&lt;/h2>
 &lt;p>Android12 から L2TP/IPSec の設定ができなくなりました。&lt;br>
-NEC IX でも IKEv2/IPSec の設定をコマンドで設定できるようなのですがよく分からないので断念しました。&lt;/p>
+NEC IX でも IKEv2/IPSec の設定をコマンドで設定できるようなのですがよく分からないので断念しました。&lt;br>
+とりあえずアクセスランプがきれいです。&lt;/p>
+&lt;p>&lt;img src="https://takag.me/img/2023/01-10/nec-ix2207.jpg"
+loading="lazy"
+>&lt;/p>
 &lt;h2 id="参考">参考&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a class="link" href="https://jpn.nec.com/univerge/ix/Info/ix2207.html" target="_blank" rel="noopener"
