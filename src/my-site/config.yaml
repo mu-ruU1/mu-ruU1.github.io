@@ -247,3 +247,8 @@ markup:
     lineNos: false
     lineNumbersInTable: true
     tabWidth: 4
+
+imaging:
+  exif:
+    disableDate: true
+    disableLatLong: true
