@@ -1,4 +1,41 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Yuuのブログ</title><link>https://takag.me/</link><description>Recent content on Yuuのブログ</description><generator>Hugo -- gohugo.io</generator><language>ja</language><atom:link href="https://takag.me/index.xml" rel="self" type="application/rss+xml"/><item><title>IX2207で自宅ネットワーク改造 (1)</title><link>https://takag.me/p/2023-01-10/</link><pubDate>Tue, 10 Jan 2023 01:12:14 +0900</pubDate><guid>https://takag.me/p/2023-01-10/</guid><description>&lt;img src="https://takag.me/img/2023/01-10/nec-ix2207-o.jpg" alt="Featured image of post IX2207で自宅ネットワーク改造 (1)" />&lt;h2 id="はじめに">はじめに&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Yuuのブログ</title><link>https://takag.me/</link><description>Recent content on Yuuのブログ</description><generator>Hugo -- gohugo.io</generator><language>ja</language><atom:link href="https://takag.me/index.xml" rel="self" type="application/rss+xml"/><item><title>ノートPCにUbuntuをインストールしてみた</title><link>https://takag.me/p/2023-01-30/</link><pubDate>Mon, 30 Jan 2023 22:35:09 +0900</pubDate><guid>https://takag.me/p/2023-01-30/</guid><description>&lt;img src="https://takag.me/img/2023/01-30/desktop.png" alt="Featured image of post ノートPCにUbuntuをインストールしてみた" />&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>インストール時の注意と自分がやった設定等を書き残しておきます。&lt;/p>
+&lt;h2 id="インストール">インストール&lt;/h2>
+&lt;p>Asus Expertbook は電源ボタンを押した直後に&lt;code>F2&lt;/code>キーを長押しすることで BIOS に入ることができます。&lt;br>
+Ubuntu のインストールメディアからブートするとインストーラーが起動します。&lt;br>
+しかし&lt;code>Turn off RST&lt;/code>の警告が出てインストールを中断させられました。&lt;br>
+&lt;a class="link" href="https://help.ubuntu.com/rst/" target="_blank" rel="noopener"
+>Ubuntu 公式ドキュメント&lt;/a>ではレジストリエディタを使った Intel RST 構成を変更する方法が紹介されていますが、面倒だったので BIOS から Intel RST を無効にしました。&lt;/p>
+&lt;ol>
+&lt;li>Advanced Mode で SATA 設定に入り
+&lt;img src="https://takag.me/img/2023/01-30/bios_01.jpg"
+loading="lazy"
+>&lt;/li>
+&lt;li>SATA モードを AHCI に変更する
+&lt;img src="https://takag.me/img/2023/01-30/bios_02.jpg"
+loading="lazy"
+>&lt;/li>
+&lt;/ol>
+&lt;p>これで Ubuntu をインストールすることができます。&lt;/p>
+&lt;h2 id="バッテリー充電制御">バッテリー充電制御&lt;/h2>
+&lt;p>バッテリーの劣化を防ぐために設定します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo apt install -y powertop tlp tlp-rdw
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo powertop --auto-tune
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo tlp start
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>設定ファイル&lt;code>/etc/tlp.conf&lt;/code>の修正&lt;br>
+数値はお好みで&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-txt" data-lang="txt">&lt;span class="line">&lt;span class="cl">START_CHARGE_THRESH_BAT0=75
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">STOP_CHARGE_THRESH_BAT0=80
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="シリアルを使用できるようにする">シリアルを使用できるようにする&lt;/h2>
+&lt;p>ルーターの設定でシリアル接続を利用するために行いました。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ ll /dev/ttyUSB0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">crw-rw---- &lt;span class="m">1&lt;/span> root dialout &lt;span class="m">188&lt;/span> /dev/ttyUSB0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>ユーザーを dialout グループに追加する&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo gpasswd -a &lt;span class="nv">$USER&lt;/span> dialout
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>再ログインすることで有効になります。&lt;/p></description></item><item><title>IX2207で自宅ネットワーク改造 (1)</title><link>https://takag.me/p/2023-01-10/</link><pubDate>Tue, 10 Jan 2023 01:12:14 +0900</pubDate><guid>https://takag.me/p/2023-01-10/</guid><description>&lt;img src="https://takag.me/img/2023/01-10/nec-ix2207-o.jpg" alt="Featured image of post IX2207で自宅ネットワーク改造 (1)" />&lt;h2 id="はじめに">はじめに&lt;/h2>
 &lt;p>自宅のネットワークを改造したい。&lt;br>
 そういう訳で NEC IX2007 を買いました。&lt;br>
 YAMAHA の VPN ルーターと迷ったのですがクラウド管理等が無料でできるということで NEC にしました。
