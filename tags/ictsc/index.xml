@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ictsc on Yuuのブログ</title><link>https://takag.me/tags/ictsc/</link><description>Recent content in ictsc on Yuuのブログ</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Sun, 05 Mar 2023 23:56:18 +0900</lastBuildDate><atom:link href="https://takag.me/tags/ictsc/index.xml" rel="self" type="application/rss+xml"/><item><title>ICTSC 2022に参加しました</title><link>https://takag.me/p/2023-03-05/</link><pubDate>Sun, 05 Mar 2023 23:56:18 +0900</pubDate><guid>https://takag.me/p/2023-03-05/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>ICT トラブルシューティングコンテストとは、ネットワーク・サーバー・セキュリティ・データベースなどを出題範囲とし、それに関するトラブルを特定・解決し報告書を提出するといった競技内容となってます。&lt;br>
+実際にトラブルが発生しているサーバーにアクセスし、課題解決に取り組みます。&lt;br>
+今回は５人でチームを組み参加しました。&lt;/p>
+&lt;h2 id="日程">日程&lt;/h2>
+&lt;p>2023 年３月４日～ ３月５日 の２日間オンラインで行われました。&lt;/p>
+&lt;h3 id="１日目">１日目&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>時間&lt;/th>
+&lt;th>予定&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>10:00 ～ 10:20&lt;/td>
+&lt;td>開会式&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>10:30&lt;/td>
+&lt;td>競技開始&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>16:30&lt;/td>
+&lt;td>競技終了&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="２日目">２日目&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>時間&lt;/th>
+&lt;th>予定&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>10:00&lt;/td>
+&lt;td>競技開始&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>16:30&lt;/td>
+&lt;td>競技終了&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>17:30 ～ 19:00&lt;/td>
+&lt;td>閉会式&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="コンテスト前にやったこと">コンテスト前にやったこと&lt;/h2>
+&lt;p>&lt;a class="link" href="https://blog.icttoracon.net/category/problems/problems_summary/" target="_blank" rel="noopener"
+>過去問&lt;/a>を眺めていたところ、ネットワーク問題では&lt;a class="link" href="https://vyos.io/" target="_blank" rel="noopener"
+>VyOS&lt;/a>が使用されていたため、&lt;br>
+VyOS の基本的な操作を勉強しました。&lt;/p>
+&lt;h2 id="1-日目">1 日目&lt;/h2>
+&lt;p>この日はチーム同士オフラインで集まって取り組みました。&lt;/p>
+&lt;h3 id="奴の名は-1">奴の名は (1)&lt;/h3>
+&lt;p>この問題は、LDAP に保存されている&lt;code>alice&lt;/code>ユーザーに ssh でログインできるようにするというものです。&lt;/p>
+&lt;p>早速つまずきました。&lt;br>
+LDAP って何？？という状態だったので、まずはそこから調べました。&lt;/p>
+&lt;p>とりあえず、ssh すると&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ ssh alice@localhost
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">alice@localhost&lt;span class="err">&amp;#39;&lt;/span>s password:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Permission denied, please try again.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>このようにログインできませんでした。&lt;br>
+色々調べましたが、分からなかったため次の問題に移りました。&lt;/p>
+&lt;p>なお&lt;a class="link" href="#%e5%a5%b4%e3%81%ae%e5%90%8d%e3%81%af-2" >２日目&lt;/a>に再挑戦しました。&lt;/p>
+&lt;h3 id="ping-が飛ばない">ping が飛ばない&lt;/h3>
+&lt;p>この問題は、&lt;code>Host01&lt;/code> から &lt;code>Host02&lt;/code> への ping が飛ばない原因を突き止めて解決するというものです。&lt;/p>
+&lt;p>&lt;code>Host01&lt;/code>,&lt;code>Router&lt;/code>,&lt;code>Host02&lt;/code>には VyOS がインストールされている状態です。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> +------------+
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | Host01 |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | 172.16.0.1 |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> +-----+------+
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> +-------+--------+
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | 172.16.255.254 |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | Router |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | 172.17.255.254 |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> +-------+--------+
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> +-----+------+
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | Host02 |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | 172.17.0.1 |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> +------------+
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>まず、&lt;code>Host01 -&amp;gt; Router&lt;/code>では ping が通るため&lt;code>Host01&lt;/code>の静的ルーティングを疑い、見事設定されていないことが分かりました。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">set protocols static route 172.17.0.0/16 next-hop 172.16.255.254
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>設定をしても ping が通らなかったため、&lt;code>Router&lt;/code>のファイアウォールを見ました。&lt;br>
+とりあえず、icmp の許可を行いました。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">set firewall name ETH1-OUT rule 11 action accept
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">set firewall name ETH1-OUT rule 11 protocol icmp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>後は報告書を書いて提出し、満点を頂きました！！&lt;/p>
+&lt;h3 id="やらかしたかもしれない">やらかしたかもしれない&amp;hellip;&lt;/h3>
+&lt;p>この問題は、&lt;code>sudo su&lt;/code>を実行した後に&lt;code>cd /&lt;/code>ができなくなるため、それをできるようにするというものです。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">user@host01:~$ &lt;span class="nb">echo&lt;/span> &lt;span class="nv">$SEHLL&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/bin/bash
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">user@host01:~$ sudo su
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">root@host01:/home/user# &lt;span class="nb">echo&lt;/span> &lt;span class="nv">$SHELL&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/usr/bin/rbash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>制限付きの&lt;code>bash&lt;/code>である&lt;code>rbash&lt;/code>であることが分かり、&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ ls -l /usr/bin/rbash
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">lrwxrwxrwx &lt;span class="m">1&lt;/span> root root &lt;span class="m">4&lt;/span> Jan &lt;span class="m">7&lt;/span> &lt;span class="m">2022&lt;/span> rbash -&amp;gt; bash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>bash のシンボリックリンクであり解除するコマンド&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">unlink rbash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>を実行し解決しました。&lt;/p>
+&lt;h3 id="データベースに入れない-1">データベースに入れない (1)&lt;/h3>
+&lt;p>この問題は、&lt;code>PC&lt;/code>から&lt;code>Router&lt;/code>を挟んで MySQL&lt;code>Server&lt;/code>にログインできるようにするというものです。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> +--------------+
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | PC |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | 172.16.1.128 |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> +-----+--------+
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> +-----+------+
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | 172.16.1.1 |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | Router |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | 172.16.2.1 |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> +-----+------+
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> +-----+--------+
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | Server |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> | 172.16.2.128 |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> +--------------+
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>MySQL サーバーの設定等は他のメンバーに頼み、自分は&lt;code>Router&lt;/code>のファイアウォール等を確認しました。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">set firewall name client-in rule 10 action accept
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">set firewall name client-in rule 10 destination port 3306
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">set firewall name client-in rule 10 protocol tcp_udp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>しかし 200 点満点中 190 点だったため、残り 10 点の原因を模索しました。&lt;/p>
+&lt;p>なお&lt;a class="link" href="#%e3%83%87%e3%83%bc%e3%82%bf%e3%83%99%e3%83%bc%e3%82%b9%e3%81%ab%e5%85%a5%e3%82%8c%e3%81%aa%e3%81%84-2" >２日目&lt;/a>に再挑戦しました。&lt;/p>
+&lt;h2 id="２日目-1">２日目&lt;/h2>
+&lt;p>この日はチーム同士オンラインで取り組みました。&lt;br>
+オフラインの方が教え合いや議論が円滑に進み、&lt;br>
+やりやすいと感じました。&lt;/p>
+&lt;h3 id="奴の名は-2">奴の名は (2)&lt;/h3>
+&lt;p>&lt;code>/var/log/auth.log&lt;/code>から ssh のアクセスログを見ました。&lt;br>
+エラーログをそのまま検索にかけると&lt;code>/etc/nsswitch.conf&lt;/code>を修正することで解決することが分かりましたが、些細なミスにより正解には辿り着けませんでした。&lt;/p>
+&lt;h3 id="俺自身が-dhcp-サーバーとなることだ">俺自身が DHCP サーバーとなることだ&lt;/h3>
+&lt;p>この問題は、&lt;code>wsmhost&lt;/code>の DHCP サーバーを設定した上で直接&lt;code>machine-x&lt;/code>を接続し、疎通確認を取るというものでした。&lt;/p>
+&lt;p>何も考えず、&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$ sudo systemctl start isc-dhcp-server
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>をやってしまうと、&lt;code>wsmhost&lt;/code>の ssh が切断され何もできなくなってしまいます。&lt;br>
+閉会式で、この問題が一番再展開された回数が多いことが分かり、みんな同じミスをしているのかと思いました。&lt;/p>
+&lt;p>&lt;code>wsmhost&lt;/code>には２つインターフェースがあり、それぞれデフォルトゲートウェイが設定されています。&lt;br>
+そこで、デフォルトゲートウェイが必要でないインターフェースの設定を見直しました。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">subnet 10.0.0.0 netmask 255.255.255.0 {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> range 10.0.0.128 10.0.0.140;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # option routers 10.0.0.1; &amp;lt;- コメントアウト
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> option subnet-mask 255.255.255.0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> option broadcast-address 10.0.0.255;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> default-lease-time 600;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> max-lease-time 7200;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>これで、解決です。&lt;br>
+&lt;code>range 10.0.0.128 10.0.0.140;&lt;/code>により DHCP のアドレスが&lt;code>10.0.0.128&lt;/code>から割り当てられると思っていました。&lt;br>
+&lt;code>10.0.0.128&lt;/code>に ping が通りますが、実際&lt;code>machine-x&lt;/code>には&lt;code>10.0.0.129&lt;/code>が割り当たっていました。&lt;br>
+なぞです。
+とりあえず、満点だったので良かった。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">user@wsmhost:~$ sudo systemctl status isc-dhcp-server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">● isc-dhcp-server.service - ISC DHCP IPv4 server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Loaded: loaded &lt;span class="o">(&lt;/span>/lib/systemd/system/isc-dhcp-server.service&lt;span class="p">;&lt;/span> disabled&lt;span class="p">;&lt;/span> vendor preset: enabled&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Active: active &lt;span class="o">(&lt;/span>running&lt;span class="o">)&lt;/span> since Sun 2023-03-05 10:51:59 JST&lt;span class="p">;&lt;/span> 2min 3s ago
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Docs: man:dhcpd&lt;span class="o">(&lt;/span>8&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Main PID: &lt;span class="m">40497&lt;/span> &lt;span class="o">(&lt;/span>dhcpd&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Tasks: &lt;span class="m">4&lt;/span> &lt;span class="o">(&lt;/span>limit: 1111&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Memory: 4.5M
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CGroup: /system.slice/isc-dhcp-server.service
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> └─40497 dhcpd -user dhcpd -group dhcpd -f -4 -pf /run/dhcp-server/dhcpd.pid -cf /etc/dhcp/dhcpd.conf eth0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Mar &lt;span class="m">05&lt;/span> 10:51:59 wsmhost sh&lt;span class="o">[&lt;/span>40497&lt;span class="o">]&lt;/span>: Listening on LPF/eth0/9c:a3:ba:32:44:0a/10.0.0.0/24
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Mar &lt;span class="m">05&lt;/span> 10:51:59 wsmhost dhcpd&lt;span class="o">[&lt;/span>40497&lt;span class="o">]&lt;/span>: Sending on LPF/eth0/9c:a3:ba:32:44:0a/10.0.0.0/24
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Mar &lt;span class="m">05&lt;/span> 10:51:59 wsmhost sh&lt;span class="o">[&lt;/span>40497&lt;span class="o">]&lt;/span>: Sending on LPF/eth0/9c:a3:ba:32:44:0a/10.0.0.0/24
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Mar &lt;span class="m">05&lt;/span> 10:51:59 wsmhost dhcpd&lt;span class="o">[&lt;/span>40497&lt;span class="o">]&lt;/span>: Sending on Socket/fallback/fallback-net
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Mar &lt;span class="m">05&lt;/span> 10:51:59 wsmhost sh&lt;span class="o">[&lt;/span>40497&lt;span class="o">]&lt;/span>: Sending on Socket/fallback/fallback-net
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Mar &lt;span class="m">05&lt;/span> 10:51:59 wsmhost dhcpd&lt;span class="o">[&lt;/span>40497&lt;span class="o">]&lt;/span>: Server starting service.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Mar &lt;span class="m">05&lt;/span> 10:52:02 wsmhost dhcpd&lt;span class="o">[&lt;/span>40497&lt;span class="o">]&lt;/span>: DHCPDISCOVER from 9c:a3:ba:32:d5:13 via eth0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Mar &lt;span class="m">05&lt;/span> 10:52:03 wsmhost dhcpd&lt;span class="o">[&lt;/span>40497&lt;span class="o">]&lt;/span>: DHCPOFFER on 10.0.0.129 to 9c:a3:ba:32:d5:13 &lt;span class="o">(&lt;/span>machine-x&lt;span class="o">)&lt;/span> via eth0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Mar &lt;span class="m">05&lt;/span> 10:52:03 wsmhost dhcpd&lt;span class="o">[&lt;/span>40497&lt;span class="o">]&lt;/span>: DHCPREQUEST &lt;span class="k">for&lt;/span> 10.0.0.129 &lt;span class="o">(&lt;/span>10.0.0.128&lt;span class="o">)&lt;/span> from 9c:a3:ba:32:d5:13 &lt;span class="o">(&lt;/span>machine-x&lt;span class="o">)&lt;/span> via eth0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Mar &lt;span class="m">05&lt;/span> 10:52:03 wsmhost dhcpd&lt;span class="o">[&lt;/span>40497&lt;span class="o">]&lt;/span>: DHCPACK on 10.0.0.129 to 9c:a3:ba:32:d5:13 &lt;span class="o">(&lt;/span>machine-x&lt;span class="o">)&lt;/span> via eth0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="ipv6-の-dhcp">IPv6 の DHCP&lt;/h3>
+&lt;p>この問題は&lt;code>dhcp-server&lt;/code>に frr をインストールして、&lt;code>client&lt;/code>に IPv6 アドレス(&lt;code>2001:db8::/64&lt;/code>)を配布し、疎通確認をするというものです。&lt;/p>
+&lt;p>FRRouting が何のことか分からず、時間がかかりました。&lt;br>
+コマンドは Cisco に似ている気がします。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> sudo apt install frr frr-pythontools
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>sudo vtysh&lt;/code>で FRR に入り、&lt;code>eth0&lt;/code>の設定をします。&lt;br>
+公式ドキュメントで&lt;code>DHCP&lt;/code>の単語で検索をかけてもなかったため、&lt;br>
+IPv6 のページを見ていたら&lt;a class="link" href="https://docs.frrouting.org/en/latest/ipv6.html#router-advertisement-configuration-example" target="_blank" rel="noopener"
+>それらしい説明&lt;/a>がありました。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">interface eth0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ipv6 address 2001:db8::1/64
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ipv6 nd prefix 2001:db8::/64
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> no ipv6 nd suppress-ra
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ipv6 nd prefix 2001:0DB8:5009::/64
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>これにより、&lt;code>dhcp-server&lt;/code>が定期的に自身を広報するようになります。&lt;/p>
+&lt;p>&lt;code>client&lt;/code>の方では、IPv6 の DHCP を有効にしました。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># /etc/netplan/01-netcfg.yaml
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">network:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ethernets:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> eth0:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addresses:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - 192.168.6.2/24
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dhcp4: &amp;#39;no&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dhcp6: &amp;#39;yes&amp;#39; ## 変更箇所
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> routes:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - to: 0.0.0.0/0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> via: 192.168.6.254
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> nameservers:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addresses:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - &amp;lt;address&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - &amp;lt;address&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> search:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - localdomain
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> renderer: networkd
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> version: 2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>client&lt;/code>で&lt;code>ip a&lt;/code>をすると、&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">user@client:~$ ip a
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt; mtu &lt;span class="m">65536&lt;/span> qdisc noqueue state UNKNOWN group default qlen &lt;span class="m">1000&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> inet 127.0.0.1/8 scope host lo
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> valid_lft forever preferred_lft forever
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> inet6 ::1/128 scope host
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> valid_lft forever preferred_lft forever
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2: eth0: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu &lt;span class="m">1500&lt;/span> qdisc fq_codel state UP group default qlen &lt;span class="m">1000&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> link/ether 9c:a3:ba:32:93:a0 brd ff:ff:ff:ff:ff:ff
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> altname enp0s3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> altname ens3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> inet 192.168.6.2/24 brd 192.168.6.255 scope global eth0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> valid_lft forever preferred_lft forever
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> inet6 2001:db8::9ea3:baff:fe32:93a0/64 scope global dynamic mngtmpaddr noprefixroute
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> valid_lft 2591712sec preferred_lft 604512sec
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> inet6 fe80::9ea3:baff:fe32:93a0/64 scope link
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> valid_lft forever preferred_lft forever
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>これより、&lt;code>client&lt;/code>が&lt;code>2001:db8::/64&lt;/code>のレンジ内でアドレスが付与されていることが確認できます。&lt;/p>
+&lt;p>ping 結果は、&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">user@dhcp-server:~$ ping 2001:db8::9ea3:baff:fe32:93a0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">PING 2001:db8::9ea3:baff:fe32:93a0&lt;span class="o">(&lt;/span>2001:db8::9ea3:baff:fe32:93a0&lt;span class="o">)&lt;/span> &lt;span class="m">56&lt;/span> data bytes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">64&lt;/span> bytes from 2001:db8::9ea3:baff:fe32:93a0: &lt;span class="nv">icmp_seq&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">1&lt;/span> &lt;span class="nv">ttl&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">64&lt;/span> &lt;span class="nv">time&lt;/span>&lt;span class="o">=&lt;/span>0.170 ms
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">64&lt;/span> bytes from 2001:db8::9ea3:baff:fe32:93a0: &lt;span class="nv">icmp_seq&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">2&lt;/span> &lt;span class="nv">ttl&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">64&lt;/span> &lt;span class="nv">time&lt;/span>&lt;span class="o">=&lt;/span>0.304 ms
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">64&lt;/span> bytes from 2001:db8::9ea3:baff:fe32:93a0: &lt;span class="nv">icmp_seq&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">3&lt;/span> &lt;span class="nv">ttl&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">64&lt;/span> &lt;span class="nv">time&lt;/span>&lt;span class="o">=&lt;/span>0.211 ms
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">64&lt;/span> bytes from 2001:db8::9ea3:baff:fe32:93a0: &lt;span class="nv">icmp_seq&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">4&lt;/span> &lt;span class="nv">ttl&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">64&lt;/span> &lt;span class="nv">time&lt;/span>&lt;span class="o">=&lt;/span>0.187 ms
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">64&lt;/span> bytes from 2001:db8::9ea3:baff:fe32:93a0: &lt;span class="nv">icmp_seq&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">5&lt;/span> &lt;span class="nv">ttl&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">64&lt;/span> &lt;span class="nv">time&lt;/span>&lt;span class="o">=&lt;/span>0.221 ms
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">^C
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">--- 2001:db8::9ea3:baff:fe32:93a0 ping statistics ---
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">5&lt;/span> packets transmitted, &lt;span class="m">5&lt;/span> received, 0% packet loss, &lt;span class="nb">time&lt;/span> 4102ms
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">rtt min/avg/max/mdev &lt;span class="o">=&lt;/span> 0.170/0.218/0.304/0.046 ms
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>満点を頂けました。&lt;/p>
+&lt;h3 id="データベースに入れない-2">データベースに入れない (2)&lt;/h3>
+&lt;p>ルーターで 3306 ポートの&lt;code>TCP&lt;/code>通信のみを許可する設定に変更しました。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">set firewall name client-in rule 10 action accept
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">set firewall name client-in rule 10 destination port 3306
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">set firewall name client-in rule 10 protocol tcp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>また、&lt;code>Server&lt;/code>のファイアウォールの設定で IPv6 を不許可に変更しました。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-env" data-lang="env">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># /etc/default/ufw&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">IPV6&lt;/span>&lt;span class="o">=&lt;/span>no
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>２回修正し提出しましたが、点数は変わらず 190 点でした。&lt;/p>
+&lt;h3 id="トラブルシューターの初仕事">トラブルシューターの初仕事&lt;/h3>
+&lt;p>この問題は OSPF に変更したところ、&lt;code>pc&lt;/code>から&lt;code>sv01&lt;/code>,&lt;code>sv02&lt;/code>それぞれにアクセスできなくなりそれを解決するというものです。&lt;/p>
+&lt;p>あと一歩のところで解けなく悔しかったです。&lt;br>
+３台のルーターで OSPF を動かしているのですが、&lt;code>router-id&lt;/code>が重複していたためそれを修正しました。&lt;br>
+しかし、それでも解決せず試行錯誤しましたが、断念しました。&lt;/p>
+&lt;h3 id="たかし先輩の-k8s-作問">たかし先輩の K8s 作問&lt;/h3>
+&lt;p>マニフェストを眺めたり、pod や svc のログを見たり意味のないことをしていました。&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>ICTSC2022 では主にネットワーク系の問題を２人で取り組みました。&lt;br>
+Kubernetes を軽く触ったことがあり、問題に取り組んでみましたが全く歯が立たずまだまだだなといった感じです。&lt;br>
+22 チーム中 14 位という結果となりましたが、とても良い刺激になりました。&lt;/p>
+&lt;p>&lt;img src="https://takag.me/img/2023/03-05/ictsc.jpg"
+loading="lazy"
+>&lt;/p></description></item></channel></rss>
